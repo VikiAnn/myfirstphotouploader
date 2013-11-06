@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Viki's Pictures</title>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css">
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "Viki's Pictures", root_path, :class => "brand" %>
+
+      <ul class="nav">
+        <li class="active dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pictures</a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <% Picture.all.each do |picture| %>
+              <li><%= link_to picture.name.titleize, picture %></li>
+            <% end %>
+          </ul>
+        </li>
+        <li ><%= link_to 'New Picture', new_picture_path %></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <%= yield %>
+</div>
+<footer>
+  <div class="container">
+    Rails Girls 2013
+  </div>
+</footer>
+ <script src="http://code.jquery.com/jquery.js"></script>
+   <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

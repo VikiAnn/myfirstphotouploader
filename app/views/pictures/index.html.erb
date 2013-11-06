@@ -1,0 +1,33 @@
+<h1>Listing Pictures</h1>
+
+<div id="myCarousel" class="carousel slide">
+  <ol class="carousel-indicators">
+    <% @pictures.each_with_index do |picture, index| %>
+      <li data-target="#myCarousel" data-slide-to="<%= index %>" class="<%= "active" if index == 0 %>"></li>
+    <% end %>
+  </ol>
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+    <% @pictures.each_with_index do |picture, index| %>
+      <div class="<%= "active" if index == 0 %> item">
+        <%= image_tag picture.picture_url if picture.picture.present?%>
+      </div>
+    <% end %>
+    
+  </div>
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+
+<% @pictures.in_groups_of(4) do |group| %>
+  <div class="row">
+    <% group.compact.each do |picture| %>
+      <div class="span3">
+        <%= image_tag picture.picture_url(:thumb) if picture.picture.present?%>
+        <h4><%= link_to picture.name.titleize, picture %></h4>
+        <%= picture.description %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
